@@ -1,0 +1,54 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Sudoku</PageTitle>
+
+<h1>Sudoku</h1>
+
+<p>This is a basic Sudoku game.</p>
+
+@if (level == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+     
+        <tbody>
+            @foreach (var row in level)
+            {
+                <tr>
+                     @foreach (var cell in row)
+                    {
+                    <td>@cell</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private int[][]? level = new int[3][]; // Initialize with a non-null value
+
+    protected override async Task OnInitializedAsync()
+    {
+        int[]? levelData = await Http.GetFromJsonAsync<int[]>("games/level-1.json");
+
+        if (levelData != null) {
+            level = new int[3][];
+            for (int i = 0; i < 3; i++)
+            {
+                level[i] = new int[3];
+                for (int j = 0; j < 3; j++)
+                {
+                    level[i][j] = levelData[i * 3 + j];
+                }
+            }
+        }
+    }
+
+
+
+}
