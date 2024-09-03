@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
+@using System.Text.Json
 
 <PageTitle>Sudoku</PageTitle>
 
@@ -16,14 +17,16 @@ else
     <table class="table">
      
         <tbody>
-            @foreach (var row in level)
-            {
-                <tr>
-                     @foreach (var cell in row)
-                    {
-                    <td>@cell</td>
-                    }
-                </tr>
+            @if (level != null) {
+                @foreach (var row in level)
+                {
+                    <tr>
+                        @foreach (var cell in row)
+                        {
+                        <td>@cell</td>
+                        }
+                    </tr>
+                }
             }
         </tbody>
     </table>
@@ -46,6 +49,7 @@ else
                     level[i][j] = levelData[i * 3 + j];
                 }
             }
+            Console.WriteLine(JsonSerializer.Serialize(level));
         }
     }
 
