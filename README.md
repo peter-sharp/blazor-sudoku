@@ -9,5 +9,6 @@ This is a simple Sudoku game made using the .net Blazor framework. The goal is t
 -[ ] Add level generator. Which will either replace json levels, or supplement them
 -[ ] Host this on Azure or something else.
 
-## Roadblocks
+## Issues
 - Page loads but throws  "Unhandled exception rendering component: Object reference not set to an instance of an object." on line 19
+- Haven't figured out how to get debugger working for Blazor yet
